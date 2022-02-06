@@ -9,4 +9,17 @@ class Brainfuck(T)
   def initialize(*, @input : IO = STDIN, @output : IO = STDOUT)
     raise ArgumentError.new("invalid cell size") unless CELL_SIZES.includes?(T)
   end
+
+  def run(instructions : String) : Nil
+    run(IO::Memory.new(instructions))
+  end
+
+  def run(path : Path) : Nil
+    File.open(path) do |file|
+      run(file)
+    end
+  end
+
+  def run(instructions : IO) : Nil
+  end
 end
