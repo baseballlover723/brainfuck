@@ -61,17 +61,19 @@ describe Brainfuck({{cell_size}}) do
   end
 
   describe "it successfully runs" do
-    Dir["#{__DIR__}/test_files/*.bf"].each do |instruction_file|
-      output_file = instruction_file[0...-File.extname(instruction_file).size] + ".output"
+    Dir["#{__DIR__}/test_files/*.bf"].each do |instruction_string_path|
+      output_file = instruction_string_path[0...-File.extname(instruction_string_path).size] + ".output"
+      input_file = instruction_string_path[0...-File.extname(instruction_string_path).size] + ".input"
       next unless File.exists?(output_file)
-      test_name = File.basename(instruction_file)
+      instruction_path = Path.new(instruction_string_path)
+      test_name = File.basename(instruction_path)
       expected_output = File.read(output_file)
 
       it test_name do
-        input = IO::Memory.new
+        input = File.exists?(input_file) ? File.open(input_file, "r") : IO::Memory.new
         output = String.build do |output_io|
           bf = Brainfuck(Int8).new(input: input, output: output_io)
-          bf.run(instruction_file)
+          bf.run(instruction_path)
         end
 
         output.should eq(expected_output)
@@ -80,17 +82,19 @@ describe Brainfuck({{cell_size}}) do
   end
 
   describe "it successfully errors on" do
-    Dir["#{__DIR__}/test_files/*.bf"].each do |instruction_file|
-      output_file = instruction_file[0...-File.extname(instruction_file).size] + ".error"
+    Dir["#{__DIR__}/test_files/*.bf"].each do |instruction_string_path|
+      output_file = instruction_string_path[0...-File.extname(instruction_string_path).size] + ".error"
+      input_file = instruction_string_path[0...-File.extname(instruction_string_path).size] + ".input"
       next unless File.exists?(output_file)
-      test_name = File.basename(instruction_file)
+      instruction_path = Path.new(instruction_string_path)
+      test_name = File.basename(instruction_path)
 
       it test_name do
-        input = IO::Memory.new
+        input = File.exists?(input_file) ? File.open(input_file, "r") : IO::Memory.new
         output = IO::Memory.new
         bf = Brainfuck(Int8).new(input: input, output: output)
         expect_raises(Exception) do
-          bf.run(instruction_file)
+          bf.run(instruction_path)
         end
       end
     end

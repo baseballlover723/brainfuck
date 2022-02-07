@@ -1,0 +1,2 @@
+, (get input)
+. (output input)
