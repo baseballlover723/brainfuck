@@ -24,7 +24,7 @@ TODO: Write usage instructions here
 
 ## Development
 
-TODO: Write development instructions here
+Many tests copied from https://github.com/saulpw/brainfuck
 
 ## Contributing
 
