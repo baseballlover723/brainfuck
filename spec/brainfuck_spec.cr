@@ -30,22 +30,22 @@ describe Brainfuck do
   end
 
   describe "#run" do
-    it "can run with a string" do
+    it "can run with string instructions" do
       bf = Brainfuck(Int8).new(input: IO::Memory.new, output: IO::Memory.new)
       bf.run(File.read("#{__DIR__}/test_files/hello_world.bf"))
     end
 
-    it "can run with a path" do
+    it "can run with a path to instructions" do
       bf = Brainfuck(Int8).new(input: IO::Memory.new, output: IO::Memory.new)
       bf.run(Path.new("#{__DIR__}/test_files/hello_world.bf"))
     end
 
-    it "can run with an io" do
+    it "can run with an io of instructions" do
       bf = Brainfuck(Int8).new(input: IO::Memory.new, output: IO::Memory.new)
       bf.run(IO::Memory.new(File.read("#{__DIR__}/test_files/hello_world.bf")))
     end
 
-    it "can run with a file" do
+    it "can run with a file of instructions" do
       bf = Brainfuck(Int8).new(input: IO::Memory.new, output: IO::Memory.new)
       File.open("#{__DIR__}/test_files/hello_world.bf", "r") do |file|
         bf.run(file)
