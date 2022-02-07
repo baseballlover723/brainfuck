@@ -3,9 +3,7 @@ require "./spec_helper"
 describe Brainfuck do
   describe "#new" do
     it "rejects invalid cell sizes" do
-      expect_raises(ArgumentError) do
-        Brainfuck(String).new(input: IO::Memory.new, output: IO::Memory.new)
-      end
+      assert_compile_error("test_files/compile_error.cr", "String is not a valid cell")
     end
 
     it "defaults input to STDIN" do
