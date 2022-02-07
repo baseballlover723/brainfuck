@@ -67,7 +67,7 @@ describe Brainfuck({{cell_size}}) do
       next unless File.exists?(output_file)
       instruction_path = Path.new(instruction_string_path)
       test_name = File.basename(instruction_path)
-      expected_output = File.read(output_file)
+      expected_output = File.read(output_file).gsub("{cell_size}", {{cell_size}}::MAX)
 
       it test_name do
         input = File.exists?(input_file) ? File.open(input_file, "r") : IO::Memory.new
