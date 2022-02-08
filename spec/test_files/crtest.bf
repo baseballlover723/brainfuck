@@ -7,4 +7,4 @@ LK/LK   EOF leaves cell unchanged
 Anything with O in it means newline is not input as 10 
 Anything else is fairly unexpected)
 
->,>+++++++++,>+++++++++++[<++++++<++++++<+>>>-]<<.>.<<-.>.>.<<.!
+>,>+++++++++,>+++++++++++[<++++++<++++++<+>>>-]<<.>.<<-.>.>.<<.
